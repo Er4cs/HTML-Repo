@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Verweis auf die CSS-Datei -->
+    <link rel="stylesheet" href="switch-style.css"> <!-- Verweis auf zusätzliche CSS-Datei für den Switch -->
+</head>
+<body>
+
+    <script>
+        // Funktion, um den Dark-Mode-Status zu speichern
+        function saveDarkModePreference(darkModeOn) {
+            localStorage.setItem('darkMode', darkModeOn);
+        }
+
+        // Funktion, um den Dark-Mode zu setzen
+        function setDarkMode(darkModeOn) {
+            var element = document.body;
+            if (darkModeOn) {
+                element.classList.add("dark-mode");
+            } else {
+                element.classList.remove("dark-mode");
+            }
+            saveDarkModePreference(darkModeOn);
+        }
+
+        // Funktion, um zwischen den Modi zu wechseln
+        function toggleMode() {
+            var darkModeOn = localStorage.getItem('darkMode') === 'true';
+            setDarkMode(!darkModeOn);
+            updateSwitchState(!darkModeOn);
+        }
+
+        // Beim Laden der Seite prüfen und den Modus entsprechend setzen
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var darkModeOn = localStorage.getItem('darkMode') === 'true';
+            setDarkMode(darkModeOn);
+            updateSwitchState(darkModeOn);
+        });
+
+        // Funktion, um den Switch-Zustand zu aktualisieren
+        function updateSwitchState(darkModeOn) {
+            var switchElement = document.getElementById('modeSwitch');
+            if (darkModeOn) {
+                switchElement.checked = true;
+            } else {
+                switchElement.checked = false;
+            }
+        }
+    </script>
+
+    <header>
+        <nav>
+            <ul>
+
+                <label class="switch">
+                    <input type="checkbox" id="modeSwitch" onclick="toggleMode()"> <!-- Position Dark MOde Switch -->
+                    <span class="slider"></span>
+                </label>
+
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Produkte.html">Produkte</a></li>
+                <li><a href="Formular.html">Formular</a></li>
+                <li><a href="Impressum.html">Impressum</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Inhalt der Hauptseite -->
+    </main>
+
+</body>
+</html>
